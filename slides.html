@@ -27,6 +27,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="slides_files/libs/revealjs/dist/theme/quarto-2f366650f320edcfcf53d73c80250a32.css">
   <link href="slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -135,7 +200,7 @@
 <section>
 <section id="thank-you" class="title-slide slide level1 center">
 <h1>Thank you!</h1>
-<p>We spend much of our free time on extendr and are excited to share!</p>
+
 </section>
 <section id="about-mossa" class="slide level2">
 <h2>About Mossa</h2>
@@ -152,15 +217,6 @@
 <li class="fragment">Spatial Statistician</li>
 <li class="fragment">Building R packages for the R-ArcGIS Bridge</li>
 </ul>
-</section>
-<section id="our-objective" class="slide level2">
-<h2>Our objective</h2>
-<ul>
-<li class="fragment">Introduce extendr</li>
-<li class="fragment">Why we’re betting on Rust</li>
-<li class="fragment">Examples</li>
-<li class="fragment">Questions</li>
-</ul>
 </section></section>
 <section id="what-is-extendr" class="title-slide slide level1 center">
 <h1>What is extendr?</h1>
@@ -173,6 +229,13 @@
 <div class="r-fit-text">
 <p><strong><em>extend</em></strong>ing R with Rust</p>
 </div>
+</section>
+<section id="what-is-extendr-1" class="slide level2">
+<h2>What is extendr?</h2>
+<ul>
+<li class="fragment">Include Rust into R packages</li>
+<li class="fragment">Akin to Rcpp &amp; cpp11</li>
+</ul>
 </section>
 <section id="what-even-is-rust" class="slide level2">
 <h2>What even is Rust?</h2>
@@ -195,15 +258,8 @@
 <h1></h1>
 
 <img data-src="images/paste-5.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="what-is-extendr-1" class="slide level2">
-<h2>What is extendr?</h2>
-<ul>
-<li class="fragment">Include Rust into R packages</li>
-<li class="fragment">Akin to Rcpp &amp; cpp11</li>
-</ul>
-</section>
 <section id="extendr-is-comprised-of" class="slide level2">
-<h2><code>extendr</code>&nbsp; is comprised of:</h2>
+<h2>extendr is comprised of:</h2>
 <ul>
 <li class="fragment">{rextendr} - usethis-like R package</li>
 <li class="fragment"><a href="https://extendr.github.io/extendr/extendr_api">extendr-api</a> - the “core” Rust library</li>
@@ -221,8 +277,173 @@
 <section id="k-downloads-and-counting" class="slide level2">
 <h2>380k downloads and counting</h2>
 
-
 <img data-src="images/paste-1.png" class="r-stretch"></section></section>
+<section>
+<section id="why-rust" class="title-slide slide level1 center">
+<h1>Why Rust?</h1>
+<ul>
+<li class="fragment">Easy to make bindings</li>
+</ul>
+</section>
+<section id="blazingly-fast" class="slide level2">
+<h2>Blazingly fast</h2>
+<p><img data-src="https://i.programmerhumor.io/2025/03/d4a0188983b23dfa9376b322d47ae657.jpeg"></p>
+
+<aside><div>
+<p><a href="">Rust Is Blazingly Fast (And We Won’t Shut Up About It)</a></p>
+</div></aside></section>
+<section id="the-compiler-is-nice" class="slide level2">
+<h2>The compiler is nice</h2>
+<p><img data-src="images/paste-18.png"></p>
+
+<aside><div>
+<p><a href="https://programmerhumor.io/backend-memes/rust-3/">programmerhumor.io</a></p>
+</div></aside></section>
+<section id="the-compiler-is-nice-1" class="slide level2">
+<h2>The compiler is nice</h2>
+<p><img data-src="images/paste-8.png"></p>
+
+<aside><div>
+<p><a href="https://medium.com/faun/why-you-should-stop-what-youre-doing-right-now-and-learn-rust-7d8ca1ff334c">Why You Should Stop What You’re Doing Right Now and Learn Rust</a></p>
+</div></aside></section>
+<section id="easy-enough-to-refactor" class="slide level2">
+<h2>Easy (enough) to refactor</h2>
+<p><img data-src="images/paste-7.png"></p>
+
+<aside><div>
+<p><a href="https://www.reddit.com/r/rust/comments/17jeezg/so_is_rust_easy_to_refactor_or_bad_to_refactor/">reddit</a></p>
+</div></aside></section>
+<section id="broaden-your-reach" class="slide level2">
+<h2>Broaden your reach</h2>
+
+<img data-src="images/paste-10.png" class="r-stretch"></section>
+<section id="quick-to-pickup" class="slide level2">
+<h2>Quick to pickup</h2>
+
+<img data-src="images/paste-6.png" class="r-stretch"></section></section>
+<section>
+<section id="section-3" class="title-slide slide level1 center">
+<h1></h1>
+<div class="r-fit-text">
+<p>A little skill goes a long way</p>
+</div>
+</section>
+<section id="example-single" class="slide level2">
+<h2>Example: single</h2>
+<div class="sourceCode" id="cb1" data-code-line-numbers="1|2|3|4"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href=""></a><span class="at">#[</span>extendr<span class="at">]</span></span>
+<span id="cb1-2"><a href=""></a><span class="kw">fn</span> gh_encode(x<span class="op">:</span> <span class="dt">f64</span><span class="op">,</span> y<span class="op">:</span> <span class="dt">f64</span><span class="op">,</span> length<span class="op">:</span> <span class="dt">usize</span>) <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span></span>
+<span id="cb1-3"><a href=""></a>    <span class="kw">let</span> coord <span class="op">=</span> Coord <span class="op">{</span> x<span class="op">,</span> y <span class="op">};</span></span>
+<span id="cb1-4"><a href=""></a>    encode(coord<span class="op">,</span> length)<span class="op">.</span>expect(<span class="st">"Failed to encode the geohash"</span>)</span>
+<span id="cb1-5"><a href=""></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-vectorize" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Example: vectorize</h2>
+<div class="sourceCode" id="cb2" data-code-line-numbers="2|3,4|5|6|7,8|11"><pre class="sourceCode numberSource rust number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode rust hljs"><span id="cb2-1" class="hljs-ln-code"><a href=""></a><span class="at">#[</span>extendr<span class="at">]</span></span>
+<span id="cb2-2" class="hljs-ln-code"><a href=""></a><span class="kw">fn</span> gh_encode(x<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">f64</span>]<span class="op">,</span> y<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">f64</span>]<span class="op">,</span> length<span class="op">:</span> <span class="dt">usize</span>) <span class="op">-&gt;</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb2-3" class="hljs-ln-code"><a href=""></a>    x</span>
+<span id="cb2-4" class="hljs-ln-code"><a href=""></a>        <span class="op">.</span>into_iter() </span>
+<span id="cb2-5" class="hljs-ln-code"><a href=""></a>        <span class="op">.</span>zip(y<span class="op">.</span>into_iter()) </span>
+<span id="cb2-6" class="hljs-ln-code"><a href=""></a>        <span class="op">.</span>map(<span class="op">|</span>(xi<span class="op">,</span> yi)<span class="op">|</span> <span class="op">{</span> </span>
+<span id="cb2-7" class="hljs-ln-code"><a href=""></a>            <span class="kw">let</span> coord <span class="op">=</span> Coord <span class="op">{</span> x<span class="op">:</span> xi<span class="op">,</span> y<span class="op">:</span> yi <span class="op">};</span></span>
+<span id="cb2-8" class="hljs-ln-code"><a href=""></a>            encode(coord<span class="op">,</span> length)</span>
+<span id="cb2-9" class="hljs-ln-code"><a href=""></a>                <span class="op">.</span>expect(<span class="st">"Failed to encode the geohash"</span>)</span>
+<span id="cb2-10" class="hljs-ln-code"><a href=""></a>        <span class="op">}</span>)</span>
+<span id="cb2-11" class="hljs-ln-code"><a href=""></a>        <span class="op">.</span><span class="pp">collect::</span><span class="op">&lt;</span><span class="dt">Vec</span><span class="op">&lt;</span>_<span class="op">&gt;</span>()</span>
+<span id="cb2-12" class="hljs-ln-code"><a href=""></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-parallelize" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Example: parallelize</h2>
+<div class="sourceCode" id="cb3" data-code-line-numbers="3"><pre class="sourceCode numberSource rust number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode rust hljs"><span id="cb3-1" class="hljs-ln-code"><a href=""></a><span class="at">#[</span>extendr<span class="at">]</span></span>
+<span id="cb3-2" class="hljs-ln-code"><a href=""></a><span class="kw">fn</span> gh_encode(x<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">f64</span>]<span class="op">,</span> y<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">f64</span>]<span class="op">,</span> length<span class="op">:</span> <span class="dt">usize</span>) <span class="op">-&gt;</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb3-3" class="hljs-ln-code"><a href=""></a>    x</span>
+<span id="cb3-4" class="hljs-ln-code"><a href=""></a>        <span class="op">.</span>into_iter()</span>
+<span id="cb3-5" class="hljs-ln-code"><a href=""></a>        <span class="op">.</span>zip(y<span class="op">.</span>into_iter())</span>
+<span id="cb3-6" class="hljs-ln-code"><a href=""></a>        <span class="op">.</span>par_bridge() <span class="co">// convert into a parallel iterator</span></span>
+<span id="cb3-7" class="hljs-ln-code"><a href=""></a>        <span class="op">.</span>with_min_len(<span class="dv">1024</span>) <span class="co">// set minimum parallel chunk length</span></span>
+<span id="cb3-8" class="hljs-ln-code"><a href=""></a>        <span class="op">.</span>map(<span class="op">|</span>(xi<span class="op">,</span> yi)<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb3-9" class="hljs-ln-code"><a href=""></a>            <span class="kw">let</span> coord <span class="op">=</span> Coord <span class="op">{</span> x<span class="op">:</span> xi<span class="op">,</span> y<span class="op">:</span> yi <span class="op">};</span></span>
+<span id="cb3-10" class="hljs-ln-code"><a href=""></a>            encode(coord<span class="op">,</span> length)</span>
+<span id="cb3-11" class="hljs-ln-code"><a href=""></a>                <span class="op">.</span>expect(<span class="st">"Failed to encode the geohash"</span>)</span>
+<span id="cb3-12" class="hljs-ln-code"><a href=""></a>        <span class="op">}</span>)</span>
+<span id="cb3-13" class="hljs-ln-code"><a href=""></a>        <span class="op">.</span><span class="pp">collect::</span><span class="op">&lt;</span><span class="dt">Vec</span><span class="op">&lt;</span>_<span class="op">&gt;</span>()</span>
+<span id="cb3-14" class="hljs-ln-code"><a href=""></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="extendr-in-bioformatics" class="title-slide slide level1 center">
+<h1>extendr in bioformatics</h1>
+
+</section>
+<section id="webgestaltr" class="slide level2">
+<h2>WebGestaltR:</h2>
+<p><img data-src="images/paste-11.png"></p>
+
+<aside><div>
+<p><a href="https://bzhanglab.github.io/WebGestaltR/">WebGestaltR</a></p>
+</div></aside></section>
+<section id="metabodecon" class="slide level2">
+<h2>metabodecon</h2>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="images/paste-12.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="images/paste-13.png"></p>
+</div>
+</div>
+</div>
+
+<aside><div>
+<p><a href="https://github.com/spang-lab/metabodecon">metabodecon</a></p>
+<p><a href="https://github.com/spang-lab/mdrb">mdrb</a></p>
+</div></aside></section>
+<section id="mspredictr" class="slide level2">
+<h2>mspredictr</h2>
+<p><img data-src="images/paste-14.png"></p>
+
+<aside><div>
+<p><a href="https://github.com/jeffsocal/mspredictr">mspredictr</a></p>
+</div></aside></section>
+<section id="viewmastr" class="slide level2">
+<h2>viewmastR</h2>
+<p><img data-src="images/paste-15.png"></p>
+
+<aside><div>
+<p><a href="https://github.com/furlan-lab/viewmastR">viewmastR</a></p>
+</div></aside></section></section>
+<section>
+<section id="extendr-across-language" class="title-slide slide level1 center">
+<h1>extendr across-language</h1>
+
+</section>
+<section id="phylo2vec" class="slide level2">
+<h2>Phylo2Vec</h2>
+<p><img data-src="images/paste-17.png"></p>
+
+<aside><div>
+<p><a href="https://phylo2vec.readthedocs.io/en/latest/README.html">phylo2vec</a></p>
+</div></aside></section>
+<section id="exon" class="slide level2">
+<h2>Exon</h2>
+<p><img data-src="images/paste-16.png"></p>
+
+<aside><div>
+<p><a href="https://github.com/wheretrue/exon">exon</a></p>
+</div></aside></section>
+<section id="and-even-more" class="slide level2">
+<h2>and even more</h2>
+<ul>
+<li class="fragment"><p><a href="https://github.com/wenjie1991/CellBarcodeRS">CellBarcode</a></p></li>
+<li class="fragment"><p><a href="https://github.com/mooreryan/taxozack">taxozack</a></p></li>
+<li class="fragment"><p><a href="https://github.com/angelovangel/rfaster2">rfaster2</a></p></li>
+<li class="fragment"><p><a href="https://github.com/jaropis/hrvhra">hrvhra</a></p></li>
+<li class="fragment"><p><a href="https://github.com/BrftM/fqtkWrapper">fqtkWrapper</a></p></li>
+</ul>
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

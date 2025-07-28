@@ -7,7 +7,6 @@ format:
 
 # Thank you!
 
-We spend much of our free time on extendr and are excited to share!
 
 ## About Mossa
 
@@ -21,13 +20,6 @@ We spend much of our free time on extendr and are excited to share!
 -   Spatial Statistician
 -   Building R packages for the R-ArcGIS Bridge
 
-## Our objective
-
--   Introduce extendr
--   Why we’re betting on Rust
--   Examples
--   Questions
-
 # What is extendr?
 
 # 
@@ -35,6 +27,11 @@ We spend much of our free time on extendr and are excited to share!
 ::: r-fit-text
 ***extend***ing R with Rust
 :::
+
+## What is extendr?
+
+-   Include Rust into R packages
+-   Akin to Rcpp & cpp11
 
 ## What even is Rust?
 
@@ -53,12 +50,7 @@ Scientific computing with Rust is growing
 
 ![](images/paste-5.png){fig-align="center"}
 
-## What is extendr?
-
--   Include Rust into R packages
--   Akin to Rcpp & cpp11
-
-## `extendr`  is comprised of:
+## extendr is comprised of:
 
 -   {rextendr} - usethis-like R package
 -   [extendr-api](https://extendr.github.io/extendr/extendr_api) - the “core” Rust library
@@ -73,3 +65,169 @@ Scientific computing with Rust is growing
 ## 380k downloads and counting
 
 ![](images/paste-1.png)
+
+# Why Rust?
+
+-   Easy to make bindings
+
+## Blazingly fast
+
+![](https://i.programmerhumor.io/2025/03/d4a0188983b23dfa9376b322d47ae657.jpeg)
+
+::: aside
+[Rust Is Blazingly Fast (And We Won't Shut Up About It)]()
+:::
+
+## The compiler is nice
+
+![](images/paste-18.png)
+
+::: aside
+[programmerhumor.io](https://programmerhumor.io/backend-memes/rust-3/)
+:::
+
+## The compiler is nice
+
+![](images/paste-8.png)
+
+::: aside
+[Why You Should Stop What You’re Doing Right Now and Learn Rust](https://medium.com/faun/why-you-should-stop-what-youre-doing-right-now-and-learn-rust-7d8ca1ff334c)
+:::
+
+## Easy (enough) to refactor
+
+![](images/paste-7.png)
+
+::: aside
+[reddit](https://www.reddit.com/r/rust/comments/17jeezg/so_is_rust_easy_to_refactor_or_bad_to_refactor/)
+:::
+
+## Broaden your reach
+
+![](images/paste-10.png)
+
+## Quick to pickup
+
+![](images/paste-6.png)
+
+# 
+
+::: r-fit-text
+A little skill goes a long way
+:::
+
+## Example: single
+
+``` {.rust code-line-numbers="1|2|3|4"}
+#[extendr]
+fn gh_encode(x: f64, y: f64, length: usize) -> String {
+    let coord = Coord { x, y };
+    encode(coord, length).expect("Failed to encode the geohash")
+}
+```
+
+## Example: vectorize {auto-animate="true"}
+
+``` {.rust code-line-numbers="2|3,4|5|6|7,8|11"}
+#[extendr]
+fn gh_encode(x: &[f64], y: &[f64], length: usize) -> Vec<String> {
+    x
+        .into_iter() 
+        .zip(y.into_iter()) 
+        .map(|(xi, yi)| { 
+            let coord = Coord { x: xi, y: yi };
+            encode(coord, length)
+                .expect("Failed to encode the geohash")
+        })
+        .collect::<Vec<_>()
+}
+```
+
+## Example: parallelize {auto-animate="true"}
+
+``` {.rust code-line-numbers="3"}
+#[extendr]
+fn gh_encode(x: &[f64], y: &[f64], length: usize) -> Vec<String> {
+    x
+        .into_iter()
+        .zip(y.into_iter())
+        .par_bridge() // convert into a parallel iterator
+        .with_min_len(1024) // set minimum parallel chunk length
+        .map(|(xi, yi)| {
+            let coord = Coord { x: xi, y: yi };
+            encode(coord, length)
+                .expect("Failed to encode the geohash")
+        })
+        .collect::<Vec<_>()
+}
+```
+
+# extendr in bioformatics
+
+## WebGestaltR:
+
+![](images/paste-11.png)
+
+::: aside 
+[WebGestaltR](https://bzhanglab.github.io/WebGestaltR/)
+:::
+
+## metabodecon
+
+::: {layout-ncol="2"}
+![](images/paste-12.png)
+
+![](images/paste-13.png)
+:::
+
+::: aside
+[metabodecon](https://github.com/spang-lab/metabodecon)
+
+[mdrb](https://github.com/spang-lab/mdrb)
+:::
+
+## mspredictr
+
+![](images/paste-14.png)
+
+::: aside
+[mspredictr](https://github.com/jeffsocal/mspredictr)
+:::
+
+## viewmastR
+
+![](images/paste-15.png)
+
+::: aside
+[viewmastR](https://github.com/furlan-lab/viewmastR)
+:::
+
+# extendr across-language
+
+## Phylo2Vec
+
+![](images/paste-17.png)
+
+::: aside
+[phylo2vec](https://phylo2vec.readthedocs.io/en/latest/README.html)
+:::
+
+## Exon
+
+![](images/paste-16.png)
+
+::: aside
+[exon](https://github.com/wheretrue/exon)
+:::
+
+## and even more
+
+-   [CellBarcode](https://github.com/wenjie1991/CellBarcodeRS)
+
+-   [taxozack](https://github.com/mooreryan/taxozack)
+
+-   [rfaster2](https://github.com/angelovangel/rfaster2)
+
+-   [hrvhra](https://github.com/jaropis/hrvhra)
+
+-   [fqtkWrapper](https://github.com/BrftM/fqtkWrapper)
