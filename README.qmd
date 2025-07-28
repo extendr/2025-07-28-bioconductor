@@ -1,1 +1,5 @@
-# Exploring R and Rust in Bioinformatics 
+---
+title: Exploring R and Rust in Bioinformatics 
+format: gfm
+---
+
