@@ -1,0 +1,75 @@
+---
+title: Exploring R and Rust in Bioinformatics 
+format:
+    revealjs:
+        incremental: true
+---
+
+# Thank you!
+
+We spend much of our free time on extendr and are excited to share!
+
+## About Mossa
+
+-   Maintainer & Lead Developer of extendr
+-   PhD Veterinary Epidemiology
+-   Postdoc \@ Københavns Universitet - University of Copenhagen
+
+## About Josiah
+
+-   Sr. Product Engineer \@ Esri
+-   Spatial Statistician
+-   Building R packages for the R-ArcGIS Bridge
+
+## Our objective
+
+-   Introduce extendr
+-   Why we’re betting on Rust
+-   Examples
+-   Questions
+
+# What is extendr?
+
+# 
+
+::: r-fit-text
+***extend***ing R with Rust
+:::
+
+## What even is Rust?
+
+-   Low-level language
+-   Modern day equivalent to C++
+-   Memory safe-er
+-   Developer friendly
+
+# 
+
+::: r-fit-text
+Scientific computing with Rust is growing
+:::
+
+# 
+
+![](images/paste-5.png){fig-align="center"}
+
+## What is extendr?
+
+-   Include Rust into R packages
+-   Akin to Rcpp & cpp11
+
+## `extendr`  is comprised of:
+
+-   {rextendr} - usethis-like R package
+-   [extendr-api](https://extendr.github.io/extendr/extendr_api) - the “core” Rust library
+-   [extendr-ffi](https://extendr.github.io/extendr/extendr_ffi) - bindings to R’s C API
+-   [extendr-engine](https://extendr.github.io/extendr/extendr_engine) - R engine for embedding R into Rust
+
+## extendr packages
+
+-   16 CRAN packages
+-   Many, many more on GitHub ![](images/paste-3.png)
+
+## 380k downloads and counting
+
+![](images/paste-1.png)
